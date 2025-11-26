@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>JSON 편집</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<div class="content">
+    <h2>JSON 데이터 편집</h2>
+
+    <textarea id="json-input"></textarea>
+
+    <div>
+        <button id="btn-save">저장</button>
+        <button id="btn-load">불러오기</button>
+    </div>
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/nav.js"></script>
+<script>loadNav();</script>
+
+<script>
+    const input = document.getElementById("json-input");
+
+    document.getElementById("btn-load").onclick = () => {
+        const data = loadFromLocal();
+        input.value = JSON.stringify(data, null, 2);
+    };
+
+    document.getElementById("btn-save").onclick = () => {
+        try {
+            const data = JSON.parse(input.value);
+            saveToLocal(data);
+            alert("저장 완료");
+        } catch {
+            alert("JSON 형식 오류");
+        }
+    };
+</script>
+
+</body>
+</html>

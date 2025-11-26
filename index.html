@@ -2,27 +2,31 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <title>term-project-4-2</title>
+    <title>term-project-4-2 | 홈</title>
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
 <body>
-<main class="app">
-    <section class="toolbar">
-        <button id="btn-generate">다이어그램 생성</button>
-    </section>
 
-    <section class="diagram-area">
-        <div id="diagram-wrapper">
-            <div id="diagram"></div>
-        </div>
-    </section>
+<header class="header">
+    <h1>데이터 기반 공정 다이어그램 시각화</h1>
+</header>
+
+<main class="home-container">
+    <div class="card" onclick="location.href='pages/diagram.html'">
+        <h2>다이어그램 생성</h2>
+        <p>JSON 데이터를 기반으로 Mermaid 다이어그램을 생성합니다.</p>
+    </div>
+
+    <div class="card" onclick="location.href='pages/editor.html'">
+        <h2>JSON 데이터 편집</h2>
+        <p>공정 데이터를 입력·수정하고 저장합니다.</p>
+    </div>
+
+    <div class="card" onclick="location.href='pages/about.html'">
+        <h2>프로젝트 안내</h2>
+        <p>PBL OJT 프로젝트 설명 및 기술 구성 안내.</p>
+    </div>
 </main>
 
-<script src="js/storage.js"></script>
-<script src="js/schema.js"></script>
-<script src="js/mermaid-builder.js"></script>
-<script src="js/render.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>
