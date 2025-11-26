@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.toolbar {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.diagram-area {
+    flex: 1;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+#diagram-wrapper {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    overflow: auto;
+}
