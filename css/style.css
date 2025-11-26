@@ -49,3 +49,20 @@ body {
 .navbar a:hover {
     text-decoration: underline;
 }
+
+@media print {
+    body {
+        margin: 0;
+    }
+    .header,
+    .version-panel,
+    .modal-backdrop {
+        display: none !important;
+    }
+    .main-panel {
+        width: 100%;
+    }
+    #diagram-wrapper {
+        border: none;
+    }
+}

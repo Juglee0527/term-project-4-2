@@ -1,38 +1,23 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const btnGenerate = document.getElementById('btn-generate');
+// 1) 초기화
+//  - 버전 로딩 or sample 생성
+//  - 현재 버전 렌더
+//  - 버전 리스트 렌더
+//  - 버튼 이벤트 연결 (edit/print)
 
-    let currentData = loadFromLocal();
+init();
 
-    if (!currentData) {
-        try {
-            currentData = await loadSampleData();
-            saveToLocal(currentData);
-        } catch (e) {
-            console.error(e);
-            alert('샘플 데이터 로드 실패: ' + e.message);
-        }
-    }
-
-    btnGenerate.addEventListener('click', () => {
-        if (!currentData) {
-            alert('데이터가 없습니다.');
-            return;
-        }
-
-        const { ok, errors } = validateProcessData(currentData);
-        if (!ok) {
-            alert('데이터 검증 실패:\n' + errors.join('\n'));
-            return;
-        }
-
-        const mermaidText = buildMermaidFromJson(currentData);
-        console.log('[Mermaid]', '\n' + mermaidText);
-        renderMermaid(mermaidText);
+function init() {
+    loadOrInitVersions().then(() => {
+        renderCurrentVersion();
+        renderVersionList();
+        bindEvents();
     });
+}
 
-    // 처음 로딩 시 한 번 그려보기
-    if (currentData) {
-        const mermaidText = buildMermaidFromJson(currentData);
-        renderMermaid(mermaidText);
-    }
-});
+function bindEvents() {
+    document.getElementById('btn-edit').onclick = openEditor;
+    document.getElementById('btn-print').onclick = () => window.print();
+    document.getElementById('btn-save-version').onclick = saveNewVersionFromEditor;
+    document.getElementById('btn-cancel-modal').onclick = closeEditor;
+    document.getElementById('version-list').onclick = onVersionClick;
+}

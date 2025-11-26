@@ -1,32 +1,37 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8" />
-    <title>term-project-4-2 | 홈</title>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
 <body>
-
 <header class="header">
-    <h1>데이터 기반 공정 다이어그램 시각화</h1>
+    <div class="title">데이터 기반 공정 다이어그램 시각화</div>
+    <div class="actions">
+        <button id="btn-edit">데이터 수정</button>
+        <button id="btn-print">PDF로 출력</button>
+    </div>
 </header>
 
-<main class="home-container">
-    <div class="card" onclick="location.href='pages/diagram.html'">
-        <h2>다이어그램 생성</h2>
-        <p>JSON 데이터를 기반으로 Mermaid 다이어그램을 생성합니다.</p>
-    </div>
+<main class="layout">
+    <section class="main-panel">
+        <div id="current-version-label"></div>
+        <div id="diagram-wrapper">
+            <div id="diagram"></div>
+        </div>
+    </section>
 
-    <div class="card" onclick="location.href='pages/editor.html'">
-        <h2>JSON 데이터 편집</h2>
-        <p>공정 데이터를 입력·수정하고 저장합니다.</p>
-    </div>
-
-    <div class="card" onclick="location.href='pages/about.html'">
-        <h2>프로젝트 안내</h2>
-        <p>PBL OJT 프로젝트 설명 및 기술 구성 안내.</p>
-    </div>
+    <aside class="version-panel">
+        <h3>버전 기록</h3>
+        <ul id="version-list"></ul>
+    </aside>
 </main>
 
+<!-- JSON 편집 팝업 -->
+<div id="modal-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+        <h3>JSON 데이터 수정</h3>
+        <textarea id="json-editor"></textarea>
+        <div class="modal-actions">
+            <button id="btn-save-version">버전 저장</button>
+            <button id="btn-cancel-modal">취소</button>
+        </div>
+    </div>
+</div>
+
+<!-- script들 -->
 </body>
-</html>
