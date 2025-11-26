@@ -2,15 +2,14 @@ mermaid.initialize({
     startOnLoad: false
 });
 
-async function renderMermaid(mermaidText) {
-    const container = document.getElementById('diagram');
-    container.innerHTML = '';
+async function renderMermaid(text) {
+    const container = document.getElementById("diagram");
+    container.innerHTML = "";
 
     try {
-        const { svg } = await mermaid.render('diagramGraph', mermaidText);
+        const { svg } = await mermaid.render("diagramGraph", text);
         container.innerHTML = svg;
     } catch (e) {
-        console.error(e);
-        alert('Mermaid 렌더링 오류: ' + e.message);
+        container.innerHTML = `<div style="color:red">Mermaid Error: ${e.message}</div>`;
     }
 }

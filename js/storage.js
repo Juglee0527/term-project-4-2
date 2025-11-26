@@ -1,24 +1,52 @@
-const STORAGE_KEY = 'tp42-process-data';
+const VERSION_KEY = "tp42_versions";
+const CURRENT_KEY = "tp42_current_version_id";
 
-async function loadSampleData() {
-    const res = await fetch('assets/sample.json');
-    if (!res.ok) {
-        throw new Error('sample.json 로드 실패');
+async function initVersions() {
+    let versions = JSON.parse(localStorage.getItem(VERSION_KEY));
+
+    if (!versions) {
+        // sample.json 로드
+        const res = await fetch("assets/sample.json");
+        const sample = await res.json();
+
+        versions = [{
+            id: "v1",
+            name: "초기 버전",
+            createdAt: new Date().toISOString(),
+            data: sample
+        }];
+
+        localStorage.setItem(VERSION_KEY, JSON.stringify(versions));
+        localStorage.setItem(CURRENT_KEY, "v1");
     }
-    return await res.json();
 }
 
-function saveToLocal(data) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+function getVersions() {
+    return JSON.parse(localStorage.getItem(VERSION_KEY));
 }
 
-function loadFromLocal() {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    try {
-        return JSON.parse(raw);
-    } catch (e) {
-        console.error(e);
-        return null;
-    }
+function getCurrentVersion() {
+    const id = localStorage.getItem(CURRENT_KEY);
+    const list = getVersions();
+    return list.find(v => v.id === id);
+}
+
+function saveNewVersion(jsonObj) {
+    let list = getVersions();
+    const newId = "v" + (list.length + 1);
+
+    const newVersion = {
+        id: newId,
+        name: newId,
+        createdAt: new Date().toISOString(),
+        data: jsonObj
+    };
+
+    list.push(newVersion);
+    localStorage.setItem(VERSION_KEY, JSON.stringify(list));
+    localStorage.setItem(CURRENT_KEY, newId);
+}
+
+function setCurrentVersion(id) {
+    localStorage.setItem(CURRENT_KEY, id);
 }

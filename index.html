@@ -1,13 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>공정 다이어그램 시각화</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+
 <body>
 <header class="header">
     <div class="title">데이터 기반 공정 다이어그램 시각화</div>
     <div class="actions">
         <button id="btn-edit">데이터 수정</button>
-        <button id="btn-print">PDF로 출력</button>
+        <button id="btn-print">PDF 출력</button>
     </div>
 </header>
 
 <main class="layout">
+    <!-- 메인 다이어그램 영역 -->
     <section class="main-panel">
         <div id="current-version-label"></div>
         <div id="diagram-wrapper">
@@ -15,6 +25,7 @@
         </div>
     </section>
 
+    <!-- 우측 버전 목록 -->
     <aside class="version-panel">
         <h3>버전 기록</h3>
         <ul id="version-list"></ul>
@@ -26,6 +37,7 @@
     <div class="modal">
         <h3>JSON 데이터 수정</h3>
         <textarea id="json-editor"></textarea>
+
         <div class="modal-actions">
             <button id="btn-save-version">버전 저장</button>
             <button id="btn-cancel-modal">취소</button>
@@ -33,5 +45,10 @@
     </div>
 </div>
 
-<!-- script들 -->
+<!-- script -->
+<script src="js/storage.js"></script>
+<script src="js/mermaid-builder.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
 </body>
+</html>

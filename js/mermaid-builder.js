@@ -1,10 +1,8 @@
 function buildMermaidFromJson(data) {
     const lines = [];
-    lines.push('graph LR;');
+    lines.push("graph LR;");
 
-    if (!data.processes) {
-        return lines.join('\n');
-    }
+    if (!data.processes) return lines.join("\n");
 
     data.processes.forEach((proc, pIdx) => {
         (proc.units || []).forEach((unit, uIdx) => {
@@ -17,27 +15,22 @@ function buildMermaidFromJson(data) {
                 lines.push(`${nodeId}[${sub.name}]`);
             });
 
-            lines.push('end');
+            lines.push("end");
 
-            // 단위공정 내부 연결
-            for (let sIdx = 0; sIdx < subs.length - 1; sIdx++) {
-                const fromId = `S_${pIdx}_${uIdx}_${sIdx}`;
-                const toId = `S_${pIdx}_${uIdx}_${sIdx + 1}`;
-                lines.push(`${fromId} --> ${toId}`);
+            for (let s = 0; s < subs.length - 1; s++) {
+                lines.push(`S_${pIdx}_${uIdx}_${s} --> S_${pIdx}_${uIdx}_${s + 1}`);
             }
 
-            // 이전 단위공정 마지막 → 현재 단위공정 첫 번째
             if (uIdx > 0) {
-                const prevSubs = proc.units[uIdx - 1].subs || [];
-                const currSubs = unit.subs || [];
-                if (prevSubs.length > 0 && currSubs.length > 0) {
-                    const prevLastId = `S_${pIdx}_${uIdx - 1}_${prevSubs.length - 1}`;
-                    const currFirstId = `S_${pIdx}_${uIdx}_0`;
-                    lines.push(`${prevLastId} --> ${currFirstId}`);
+                const prevSubs = proc.units[uIdx - 1].subs;
+                if (prevSubs?.length > 0 && subs.length > 0) {
+                    const prevLast = `S_${pIdx}_${uIdx - 1}_${prevSubs.length - 1}`;
+                    const currFirst = `S_${pIdx}_${uIdx}_0`;
+                    lines.push(`${prevLast} --> ${currFirst}`);
                 }
             }
         });
     });
 
-    return lines.join('\n');
+    return lines.join("\n");
 }
