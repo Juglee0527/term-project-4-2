@@ -8,7 +8,8 @@ function buildMermaidFromJson(data) {
 
     procs.forEach((proc, pIdx) => {
         const subgraphId = `P_${pIdx}`;
-        lines.push(`subgraph ${subgraphId}[${proc.name}]`);
+        // ✅ 공정 subgraph: id와 라벨 사이에 공백 + 따옴표로 감싸기
+        lines.push(`subgraph ${subgraphId} ["${proc.name}"]`);
 
         const subs = proc.subs || [];
         subs.forEach((sub, sIdx) => {
@@ -16,7 +17,9 @@ function buildMermaidFromJson(data) {
             const label = sub.equipmentName
                 ? `${sub.name} (${sub.equipmentName})`
                 : sub.name;
-            lines.push(`${nodeId}[${label}]`);
+
+            // ✅ 노드도 따옴표로 감싸서 안전하게
+            lines.push(`${nodeId}["${label}"]`);
         });
 
         lines.push("end");
