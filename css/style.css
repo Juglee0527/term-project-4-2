@@ -42,7 +42,7 @@ body {
 
 /* Version panel */
 .version-panel {
-    width: 220px;
+    width: 240px;
     border-left: 1px solid #ddd;
     padding: 20px 10px;
     background: #fff;
@@ -60,6 +60,7 @@ body {
     border-radius: 6px;
     cursor: pointer;
     background: #fafafa;
+    font-size: 13px;
 }
 
 #version-list li:hover {
@@ -77,6 +78,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 .hidden {
@@ -84,20 +86,72 @@ body {
 }
 
 .modal {
-    width: 450px;
+    width: 600px;
+    max-height: 80vh;
+    overflow: auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
 }
 
-#json-editor {
-    width: 100%;
-    height: 300px;
-    margin-bottom: 10px;
+.field-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+}
+
+.field-row label {
+    width: 90px;
+    font-size: 13px;
+}
+
+.field-row input {
+    flex: 1;
+    padding: 4px 6px;
+    font-size: 13px;
+}
+
+.unit-block {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: #fafafa;
+}
+
+.unit-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.unit-header input {
+    flex: 1;
+    padding: 3px 5px;
+    font-size: 13px;
+}
+
+.sub-list {
+    margin-left: 16px;
+}
+
+.sub-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.sub-row input {
+    flex: 1;
+    padding: 3px 5px;
+    font-size: 12px;
 }
 
 .modal-actions {
     text-align: right;
+    margin-top: 10px;
 }
 
 /* Print (PDF) mode */

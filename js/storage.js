@@ -5,7 +5,6 @@ async function initVersions() {
     let versions = JSON.parse(localStorage.getItem(VERSION_KEY));
 
     if (!versions) {
-        // sample.json 로드
         const res = await fetch("assets/sample.json");
         const sample = await res.json();
 

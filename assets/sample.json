@@ -1,27 +1,19 @@
 {
-  "workplace": "인천공장",
-  "building": "주조동",
   "processes": [
     {
-      "id": "PRC-001",
+      "id": "P-1",
       "name": "주조공정",
-      "units": [
-        {
-          "id": "U-001",
-          "name": "용해공정",
-          "subs": [
-            { "id": "S-001", "name": "원재료 투입" },
-            { "id": "S-002", "name": "가열" }
-          ]
-        },
-        {
-          "id": "U-002",
-          "name": "주형 제작",
-          "subs": [
-            { "id": "S-003", "name": "주형 조립" },
-            { "id": "S-004", "name": "주입" }
-          ]
-        }
+      "subs": [
+        { "id": "S-1-1", "name": "원재료 투입", "equipmentName": "투입 설비" },
+        { "id": "S-1-2", "name": "가열", "equipmentName": "가열로" }
+      ]
+    },
+    {
+      "id": "P-2",
+      "name": "주형 제작",
+      "subs": [
+        { "id": "S-2-1", "name": "주형 조립" },
+        { "id": "S-2-2", "name": "주입" }
       ]
     }
   ]

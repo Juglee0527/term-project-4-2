@@ -11,7 +11,7 @@
 <header class="header">
     <div class="title">데이터 기반 공정 다이어그램 시각화</div>
     <div class="actions">
-        <button id="btn-edit">데이터 수정</button>
+        <button id="btn-edit">공정 데이터 수정</button>
         <button id="btn-print">PDF 출력</button>
     </div>
 </header>
@@ -32,11 +32,17 @@
     </aside>
 </main>
 
-<!-- JSON 편집 팝업 -->
+<!-- 공정/세부공정/설비 GUI 편집 팝업 -->
 <div id="modal-backdrop" class="modal-backdrop hidden">
     <div class="modal">
-        <h3>JSON 데이터 수정</h3>
-        <textarea id="json-editor"></textarea>
+        <h3>공정 데이터 수정</h3>
+
+        <div class="field-row">
+            <label>공정 목록</label>
+            <button type="button" id="btn-add-process">공정 추가</button>
+        </div>
+
+        <div id="editor-processes"></div>
 
         <div class="modal-actions">
             <button id="btn-save-version">버전 저장</button>

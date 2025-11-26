@@ -4,32 +4,37 @@ function buildMermaidFromJson(data) {
 
     if (!data.processes) return lines.join("\n");
 
-    data.processes.forEach((proc, pIdx) => {
-        (proc.units || []).forEach((unit, uIdx) => {
-            const subgraphId = `U_${pIdx}_${uIdx}`;
-            lines.push(`subgraph ${subgraphId}[${unit.name}]`);
+    const procs = data.processes;
 
-            const subs = unit.subs || [];
-            subs.forEach((sub, sIdx) => {
-                const nodeId = `S_${pIdx}_${uIdx}_${sIdx}`;
-                lines.push(`${nodeId}[${sub.name}]`);
-            });
+    procs.forEach((proc, pIdx) => {
+        const subgraphId = `P_${pIdx}`;
+        lines.push(`subgraph ${subgraphId}[${proc.name}]`);
 
-            lines.push("end");
-
-            for (let s = 0; s < subs.length - 1; s++) {
-                lines.push(`S_${pIdx}_${uIdx}_${s} --> S_${pIdx}_${uIdx}_${s + 1}`);
-            }
-
-            if (uIdx > 0) {
-                const prevSubs = proc.units[uIdx - 1].subs;
-                if (prevSubs?.length > 0 && subs.length > 0) {
-                    const prevLast = `S_${pIdx}_${uIdx - 1}_${prevSubs.length - 1}`;
-                    const currFirst = `S_${pIdx}_${uIdx}_0`;
-                    lines.push(`${prevLast} --> ${currFirst}`);
-                }
-            }
+        const subs = proc.subs || [];
+        subs.forEach((sub, sIdx) => {
+            const nodeId = `S_${pIdx}_${sIdx}`;
+            const label = sub.equipmentName
+                ? `${sub.name} (${sub.equipmentName})`
+                : sub.name;
+            lines.push(`${nodeId}[${label}]`);
         });
+
+        lines.push("end");
+
+        // 공정 안에서 세부공정 순서 연결
+        for (let s = 0; s < subs.length - 1; s++) {
+            lines.push(`S_${pIdx}_${s} --> S_${pIdx}_${s + 1}`);
+        }
+
+        // 이전 공정의 마지막 세부공정 → 현재 공정의 첫 세부공정
+        if (pIdx > 0) {
+            const prevSubs = procs[pIdx - 1].subs || [];
+            if (prevSubs.length > 0 && subs.length > 0) {
+                const prevLast = `S_${pIdx - 1}_${prevSubs.length - 1}`;
+                const currFirst = `S_${pIdx}_0`;
+                lines.push(`${prevLast} --> ${currFirst}`);
+            }
+        }
     });
 
     return lines.join("\n");
