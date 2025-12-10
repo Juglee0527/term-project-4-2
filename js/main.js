@@ -28,9 +28,15 @@ function renderCurrentVersion() {
     const version = getCurrentVersion();
     if (!version) return;
 
+    // 버전 텍스트
     document.getElementById("current-version-label").innerText =
-        `현재 버전: ${version.id} (${version.createdAt})`;
+        `${version.id} · ${version.createdAt}`;
 
+    // 통계 계산 + 정보바 반영
+    const stats = calcStats(version.data || {});
+    updateInfoBar(stats);
+
+    // 다이어그램 렌더
     const mermaidText = buildMermaidFromJson(version.data);
     renderMermaid(mermaidText);
 }
@@ -188,4 +194,35 @@ function collectDataFromEditor() {
     });
 
     return { processes };
+}
+
+/* ====== 통계 계산 / 정보바 반영 ====== */
+
+function calcStats(data) {
+    const procs = data.processes || [];
+    let processCount = procs.length;
+    let subCount = 0;
+    let equipCount = 0;
+
+    procs.forEach(p => {
+        (p.subs || []).forEach(sub => {
+            subCount++;
+            if (sub.equipmentName) {
+                equipCount++;
+            }
+        });
+    });
+
+    return { processCount, subCount, equipCount };
+}
+
+function updateInfoBar(stats) {
+    const { processCount, subCount, equipCount } = stats;
+    const procEl = document.getElementById("info-process-count");
+    const subEl = document.getElementById("info-sub-count");
+    const eqpEl = document.getElementById("info-eqp-count");
+
+    if (procEl) procEl.innerText = processCount;
+    if (subEl) subEl.innerText = subCount;
+    if (eqpEl) eqpEl.innerText = equipCount;
 }

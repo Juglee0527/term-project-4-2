@@ -19,9 +19,46 @@
 <main class="layout">
     <!-- 메인 다이어그램 영역 -->
     <section class="main-panel">
-        <div id="current-version-label"></div>
-        <div id="diagram-wrapper">
-            <div id="diagram"></div>
+        <div class="main-panel-inner">
+            <div class="page-title-row">
+                <div>
+                    <h1 class="page-title">공정 다이어그램</h1>
+                    <p class="page-subtitle">
+                        공정 · 세부공정 · 설비 흐름을 한눈에 확인하는 시각화 도구입니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 통계 + 현재 버전 정보 -->
+            <div class="info-bar">
+                <div class="info-badges">
+            <span class="badge">
+              공정 <strong id="info-process-count">0</strong>개
+            </span>
+                    <span class="badge">
+              세부공정 <strong id="info-sub-count">0</strong>개
+            </span>
+                    <span class="badge">
+              설비 <strong id="info-eqp-count">0</strong>개
+            </span>
+                </div>
+                <div class="info-version">
+                    <span class="info-label">현재 버전</span>
+                    <span id="current-version-label" class="info-version-text"></span>
+                </div>
+            </div>
+
+            <!-- 다이어그램 카드 -->
+            <div class="diagram-card">
+                <div id="diagram-wrapper">
+                    <div id="diagram"></div>
+                </div>
+            </div>
+
+            <!-- 하단 안내 -->
+            <div class="hint-text">
+                공정 데이터를 수정하려면 오른쪽 상단의 <b>“공정 데이터 수정”</b> 버튼을 눌러주세요.
+            </div>
         </div>
     </section>
 

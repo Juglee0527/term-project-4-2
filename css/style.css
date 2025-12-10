@@ -1,12 +1,12 @@
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f7f8fb;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #eef1f7;
 }
 
 /* Header */
 .header {
-    background: #4c67ff;
+    background: #485cff;
     color: white;
     padding: 14px 20px;
     display: flex;
@@ -14,8 +14,24 @@ body {
     align-items: center;
 }
 
+.header .title {
+    font-size: 17px;
+    font-weight: 600;
+}
+
 .actions button {
     margin-left: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: #ffffff;
+    color: #333;
+}
+
+.actions button:hover {
+    background: #dde2ff;
 }
 
 /* Layout */
@@ -24,47 +40,141 @@ body {
     height: calc(100vh - 60px);
 }
 
+/* 메인 패널 쪽을 카드처럼 */
 .main-panel {
     flex: 1;
     padding: 20px;
     overflow: auto;
 }
 
+.main-panel-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 제목 영역 */
+.page-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.page-subtitle {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+/* 통계/버전 정보 바 */
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.info-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.badge {
+    font-size: 12px;
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    border: 1px solid #d3d7e3;
+    color: #333;
+}
+
+.badge strong {
+    font-weight: 700;
+}
+
+.info-version {
+    font-size: 12px;
+    color: #444;
+    text-align: right;
+}
+
+.info-label {
+    color: #888;
+    margin-right: 4px;
+}
+
+.info-version-text {
+    font-weight: 500;
+}
+
+/* 다이어그램 카드 */
+.diagram-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1);
+    padding: 12px;
+    box-sizing: border-box;
+}
+
 #diagram-wrapper {
     width: 100%;
-    height: calc(100% - 40px);
-    border: 1px solid #ccc;
-    background: white;
+    height: 500px;
+    border-radius: 6px;
+    border: 1px solid #d0d4e0;
+    background: #f9fafc;
     padding: 10px;
     box-sizing: border-box;
     overflow: auto;
 }
 
+/* 하단 안내 */
+.hint-text {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #777;
+}
+
 /* Version panel */
 .version-panel {
-    width: 240px;
-    border-left: 1px solid #ddd;
-    padding: 20px 10px;
-    background: #fff;
+    width: 260px;
+    border-left: 1px solid #d0d4e0;
+    padding: 18px 12px;
+    background: #fdfdff;
+    box-sizing: border-box;
+}
+
+.version-panel h3 {
+    margin-top: 0;
+    font-size: 14px;
+    margin-bottom: 8px;
 }
 
 #version-list {
     list-style: none;
     padding-left: 0;
+    margin: 0;
 }
 
 #version-list li {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #d3d7e3;
     margin-bottom: 8px;
     border-radius: 6px;
     cursor: pointer;
-    background: #fafafa;
-    font-size: 13px;
+    background: #ffffff;
+    font-size: 12px;
 }
 
 #version-list li:hover {
-    background: #e9e9e9;
+    background: #edf0ff;
 }
 
 /* Modal */
@@ -74,7 +184,7 @@ body {
     top: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(15, 23, 42, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,12 +196,18 @@ body {
 }
 
 .modal {
-    width: 600px;
+    width: 620px;
     max-height: 80vh;
     overflow: auto;
     background: white;
-    padding: 20px;
+    padding: 20px 22px;
     border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+}
+
+.modal h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .field-row {
@@ -112,12 +228,13 @@ body {
     font-size: 13px;
 }
 
+/* 공정 / 세부공정 폼 */
 .unit-block {
-    border: 1px solid #ddd;
+    border: 1px solid #dde1ee;
     padding: 8px;
     border-radius: 6px;
     margin-bottom: 8px;
-    background: #fafafa;
+    background: #f7f8ff;
 }
 
 .unit-header {
@@ -127,10 +244,20 @@ body {
     margin-bottom: 6px;
 }
 
+.unit-header span {
+    font-size: 12px;
+    color: #555;
+}
+
 .unit-header input {
     flex: 1;
     padding: 3px 5px;
     font-size: 13px;
+}
+
+.unit-header button {
+    font-size: 11px;
+    padding: 3px 6px;
 }
 
 .sub-list {
@@ -149,28 +276,81 @@ body {
     font-size: 12px;
 }
 
+.sub-row .btn-del-sub {
+    font-size: 11px;
+    padding: 0 6px;
+}
+
 .modal-actions {
     text-align: right;
     margin-top: 10px;
+}
+
+.modal-actions button {
+    padding: 5px 10px;
+    font-size: 13px;
 }
 
 /* Print (PDF) mode */
 @media print {
     .header,
     .version-panel,
-    .modal-backdrop {
+    .modal-backdrop,
+    .hint-text {
         display: none !important;
     }
 
     body {
         margin: 0;
+        background: #ffffff;
     }
 
     .main-panel {
         padding: 0;
     }
 
+    .main-panel-inner {
+        max-width: none;
+        margin: 0;
+    }
+
+    .diagram-card {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1);
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
     #diagram-wrapper {
-        border: none;
+        width: 100%;
+        height: 600px;           /* 필요하면 650~700으로 조정 */
+        border-radius: 6px;
+        border: 1px solid #d0d4e0;
+        background: #f9fafc;
+        padding: 10px;
+        box-sizing: border-box;
+
+        /* ✅ 스크롤 안 보이게 */
+        overflow: hidden;
+
+        /* 가운데 정렬 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #diagram {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ✅ SVG를 컨테이너 너비에 맞게 축소 */
+    #diagram svg {
+        width: 100%;      /* 가로폭을 wrapper에 맞게 */
+        height: auto;     /* 세로는 비율대로 */
     }
 }
